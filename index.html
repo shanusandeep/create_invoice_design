@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Invoice</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="invoice-container">
+        <!-- Professional Invoice Header -->
+        <div class="invoice-title">
+            <div class="title-section">
+                <h1>Invoice</h1>
+            </div>
+            <div class="company-logo">
+                <!-- Optional: Add your company logo here -->
+                <!-- <img src="logo.png" alt="Company Logo"> -->
+            </div>
+        </div>
+
+        <div class="invoice-header">
+            <div class="header-item">
+                <label>Invoice No</label>
+                <input type="text" id="invoiceNo" placeholder="INV-001">
+            </div>
+            <div class="header-item">
+                <label>Customer</label>
+                <select id="customer">
+                    <option value="">Select Customer</option>
+                    <option value="CUST001">Acme Corporation</option>
+                    <option value="CUST002">TechStart Solutions</option>
+                    <option value="CUST003">Global Innovations Ltd</option>
+                    <option value="CUST004">Quantum Enterprises</option>
+                    <option value="CUST005">Summit Industries</option>
+                    <option value="CUST006">Pioneer Technologies</option>
+                    <option value="CUST007">Elite Systems Inc</option>
+                    <option value="CUST008">Nexus Solutions</option>
+                </select>
+            </div>
+            <div class="header-item">
+                <label>Terms</label>
+                <select id="terms">
+                    <option value="">Select Terms</option>
+                    <option value="IMD">Immediate Payment</option>
+                    <option value="NET15">Net 15</option>
+                    <option value="NET30">Net 30</option>
+                    <option value="NET45">Net 45</option>
+                    <option value="NET60">Net 60</option>
+                    <option value="EOM">End of Month</option>
+                    <option value="COD">Cash on Delivery</option>
+                </select>
+            </div>
+            <div class="header-item">
+                <label>Balance Sheet Account</label>
+                <select id="balanceSheet">
+                    <option value="">Select Account</option>
+                    <option value="1001">1001 - Accounts Receivable</option>
+                    <option value="1002">1002 - Cash & Bank</option>
+                    <option value="1003">1003 - Credit Card Receivables</option>
+                    <option value="1004">1004 - Other Receivables</option>
+                </select>
+            </div>
+            <div class="header-item">
+                <label>Invoice Date</label>
+                <input type="date" id="invoiceDate">
+            </div>
+            <div class="header-item">
+                <label>Due Date</label>
+                <input type="date" id="dueDate" readonly>
+            </div>
+        </div>
+
+        <div class="addresses">
+            <div class="address-box">
+                <h3>Billing To</h3>
+                <textarea id="billingAddress" rows="4" placeholder="Enter billing address"></textarea>
+            </div>
+            <div class="address-box">
+                <div class="address-header">
+                    <h3>Shipping To</h3>
+                    <div class="same-as-billing">
+                        <input type="checkbox" id="sameAsShipping">
+                        <label for="sameAsShipping">Same as billing</label>
+                    </div>
+                </div>
+                <textarea id="shippingAddress" rows="4" placeholder="Enter shipping address"></textarea>
+            </div>
+        </div>
+
+        <div class="products-section">
+            <div class="products-header">
+                <h3>Products</h3>
+                <button class="add-item-btn" onclick="addNewRow()">
+                    <svg width="16" height="16" viewBox="0 0 16 16">
+                        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                    </svg>
+                    Add Item
+                </button>
+            </div>
+
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th style="min-width: 250px;">Product</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Rate</th>
+                        <th>Tax%</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="itemsTableBody">
+                    <tr>
+                        <td>
+                            <select class="product-select">
+                                <option value="">Select Product</option>
+                                <optgroup label="Software Services">
+                                    <option value="SW001">Web Development - Basic</option>
+                                    <option value="SW002">Web Development - Advanced</option>
+                                    <option value="SW003">Mobile App Development</option>
+                                    <option value="SW004">API Integration</option>
+                                    <option value="SW005">Cloud Migration Services</option>
+                                </optgroup>
+                                <optgroup label="Consulting">
+                                    <option value="CS001">Technical Consultation</option>
+                                    <option value="CS002">Business Analysis</option>
+                                    <option value="CS003">Project Management</option>
+                                </optgroup>
+                                <optgroup label="Hardware">
+                                    <option value="HW001">Server Hardware</option>
+                                    <option value="HW002">Networking Equipment</option>
+                                    <option value="HW003">Storage Solutions</option>
+                                </optgroup>
+                                <optgroup label="Support">
+                                    <option value="SP001">Basic Support Plan</option>
+                                    <option value="SP002">Premium Support</option>
+                                    <option value="SP003">24/7 Enterprise Support</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                        <td><input type="text"></td>
+                        <td><input type="number" class="qty-input"></td>
+                        <td><input type="number" class="rate-input"></td>
+                        <td><input type="number" class="tax-input"></td>
+                        <td class="amount">$0.00</td>
+                        <td class="actions">
+                            <button class="btn-icon delete-row" title="Delete Item">
+                                <svg width="16" height="16" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="totals">
+            <div class="notes">
+                <h3>Notes</h3>
+                <textarea rows="4" placeholder="Add notes to invoice..."></textarea>
+            </div>
+            <div class="total-box">
+                <div class="total-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Tax</span>
+                    <span id="tax-total">$0.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Shipping</span>
+                    <input type="number" id="shipping" value="0">
+                </div>
+                <div class="total-row" style="font-weight: bold;">
+                    <span>Total</span>
+                    <span id="grand-total">$0.00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-danger" onclick="clearForm()">Clear</button>
+            <button class="btn btn-secondary">Preview</button>
+            <button class="btn btn-primary">Save Invoice</button>
+            <button class="btn btn-secondary">Save & Add More</button>
+            <button class="btn btn-primary">Save & Send</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

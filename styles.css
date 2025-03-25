@@ -1,0 +1,673 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background-color: #f8f9fa;
+    --border-color: #e9ecef;
+    --danger-color: #e74c3c;
+    --text-color: #2c3e50;
+    --text-muted: #6c757d;
+    --success-color: #2ecc71;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+/* Container Styles */
+.invoice-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styles */
+.invoice-header {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.header-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.header-item label {
+    font-weight: 500;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Form Controls */
+input, select, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: white;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Address Section */
+.addresses {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.address-box {
+    padding: 1.5rem;
+    background: var(--background-color);
+    border-radius: 8px;
+}
+
+.address-box h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.address-box textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Address section styles */
+.address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.same-as-billing {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.same-as-billing input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    min-height: 100px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+textarea:disabled {
+    background-color: var(--background-color);
+    cursor: not-allowed;
+}
+
+/* Make address text pre-formatted */
+textarea {
+    white-space: pre;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.4;
+}
+
+/* Items Table */
+.items-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.items-table th {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 500;
+}
+
+.items-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    background: white;
+}
+
+.items-table tr:last-child td {
+    border-bottom: none;
+}
+
+.items-table input,
+.items-table select {
+    background: transparent;
+    border: 1px solid var(--border-color);
+}
+
+/* Add Item Button */
+.add-item-btn {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.add-item-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Totals Section */
+.totals {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.notes {
+    padding: 1.5rem;
+    background: var(--background-color);
+    border-radius: 8px;
+}
+
+.notes h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.total-box {
+    padding: 1.5rem;
+    background: var(--background-color);
+    border-radius: 8px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.total-row:last-child {
+    border-bottom: none;
+    padding-top: 1rem;
+    font-size: 1.1rem;
+}
+
+.total-row input {
+    width: 120px;
+    text-align: right;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #243747;
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #2980b9;
+}
+
+.btn-danger {
+    background: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .invoice-header {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .invoice-header {
+        grid-template-columns: 1fr;
+    }
+
+    .addresses {
+        grid-template-columns: 1fr;
+    }
+
+    .items-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .action-buttons {
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        flex: 1 1 calc(50% - 0.5rem);
+    }
+}
+
+/* Utility Classes */
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.font-bold {
+    font-weight: 600;
+}
+
+/* Amount Cells */
+.amount {
+    font-family: monospace;
+    text-align: right;
+    font-size: 1rem;
+}
+
+/* Input number styles */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Date input styles */
+input[type="date"] {
+    font-family: inherit;
+    padding-right: 0.5rem;
+}
+
+/* Placeholder styles */
+::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Focus visible outline for accessibility */
+:focus-visible {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+/* Add these new styles */
+.btn-icon {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.btn-icon:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.btn-icon svg {
+    fill: var(--danger-color);
+}
+
+.actions {
+    width: 50px;
+    text-align: center;
+}
+
+/* Update the items-table styles to include the new column */
+.items-table th:last-child,
+.items-table td:last-child {
+    width: 50px;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+/* Add minimum height for table rows */
+.items-table tr {
+    min-height: 60px;
+}
+
+/* Dropdown Styles */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1em;
+}
+
+select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+optgroup {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+option {
+    font-weight: normal;
+    padding: 0.5rem;
+}
+
+.product-select {
+    min-width: 200px;
+}
+
+/* Style readonly input */
+input[readonly] {
+    background-color: var(--background-color);
+    cursor: not-allowed;
+}
+
+/* Professional Invoice Header Styles */
+.invoice-title {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.invoice-title h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin: 0;
+}
+
+.title-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem; /* Spacing between Invoice text and number */
+}
+
+.invoice-number-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 0.75rem; /* Align with the Invoice text */
+}
+
+.invoice-number-section label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.invoice-number-section input {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    width: 150px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+
+.invoice-number-section input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.company-logo {
+    width: 150px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.company-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .invoice-title {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .title-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .company-logo {
+        width: 120px;
+        height: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-section {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .invoice-number-section {
+        padding-top: 0;
+    }
+
+    .invoice-number-section input {
+        width: 100%;
+    }
+}
+
+/* Products Section Styles */
+.products-section {
+    margin-bottom: 2rem;
+}
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.products-header h3 {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Add Item Button */
+.add-item-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.add-item-btn:hover {
+    background-color: #2980b9;
+}
+
+.add-item-btn svg {
+    fill: currentColor;
+}
+
+/* Items Table Styles */
+.items-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.items-table th {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.items-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    background: white;
+}
+
+.items-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Specific column widths */
+.items-table th:nth-child(3), /* Qty */
+.items-table th:nth-child(4), /* Rate */
+.items-table th:nth-child(5) { /* Tax% */
+    width: 100px;
+}
+
+.items-table th:nth-child(6) { /* Amount */
+    width: 120px;
+}
+
+.items-table th:last-child { /* Actions */
+    width: 80px;
+}
+
+/* Input styles within table */
+.items-table input,
+.items-table select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: white;
+}
+
+.items-table input:focus,
+.items-table select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Numeric input columns */
+.items-table input[type="number"] {
+    text-align: right;
+}
+
+/* Amount column alignment */
+.items-table td.amount {
+    text-align: right;
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+/* Responsive table */
+@media (max-width: 1024px) {
+    .items-table {
+        display: block;
+        overflow-x: auto;
+    }
+} 
