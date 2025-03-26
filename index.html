@@ -16,54 +16,58 @@
         </div>
 
         <div class="invoice-header">
-            <div class="header-item">
-                <label>Invoice No</label>
-                <input type="text" id="invoiceNo" placeholder="INV-001">
+            <div class="header-top">
+                <div class="header-item">
+                    <label>Customer</label>
+                    <select id="customer">
+                        <option value="">Select Customer</option>
+                        <option value="CUST001">Acme Corporation</option>
+                        <option value="CUST002">TechStart Solutions</option>
+                        <option value="CUST003">Global Innovations Ltd</option>
+                        <option value="CUST004">Quantum Enterprises</option>
+                        <option value="CUST005">Summit Industries</option>
+                        <option value="CUST006">Pioneer Technologies</option>
+                        <option value="CUST007">Elite Systems Inc</option>
+                        <option value="CUST008">Nexus Solutions</option>
+                    </select>
+                </div>
+                <div class="header-item">
+                    <label>Invoice No</label>
+                    <input type="text" id="invoiceNo" placeholder="INV-001">
+                </div>
             </div>
-            <div class="header-item">
-                <label>Customer</label>
-                <select id="customer">
-                    <option value="">Select Customer</option>
-                    <option value="CUST001">Acme Corporation</option>
-                    <option value="CUST002">TechStart Solutions</option>
-                    <option value="CUST003">Global Innovations Ltd</option>
-                    <option value="CUST004">Quantum Enterprises</option>
-                    <option value="CUST005">Summit Industries</option>
-                    <option value="CUST006">Pioneer Technologies</option>
-                    <option value="CUST007">Elite Systems Inc</option>
-                    <option value="CUST008">Nexus Solutions</option>
-                </select>
-            </div>
-            <div class="header-item">
-                <label>Terms</label>
-                <select id="terms">
-                    <option value="">Select Terms</option>
-                    <option value="IMD">Immediate Payment</option>
-                    <option value="NET15">Net 15</option>
-                    <option value="NET30">Net 30</option>
-                    <option value="NET45">Net 45</option>
-                    <option value="NET60">Net 60</option>
-                    <option value="EOM">End of Month</option>
-                    <option value="COD">Cash on Delivery</option>
-                </select>
-            </div>
-            <div class="header-item">
-                <label>Balance Sheet Account</label>
-                <select id="balanceSheet">
-                    <option value="">Select Account</option>
-                    <option value="1001">1001 - Accounts Receivable</option>
-                    <option value="1002">1002 - Cash & Bank</option>
-                    <option value="1003">1003 - Credit Card Receivables</option>
-                    <option value="1004">1004 - Other Receivables</option>
-                </select>
-            </div>
-            <div class="header-item">
-                <label>Invoice Date</label>
-                <input type="date" id="invoiceDate">
-            </div>
-            <div class="header-item">
-                <label>Due Date</label>
-                <input type="date" id="dueDate" readonly>
+            
+            <div class="header-bottom">
+                <div class="header-item">
+                    <label>Balance Sheet Account</label>
+                    <select id="balanceSheet">
+                        <option value="">Select Account</option>
+                        <option value="1001">1001 - Accounts Receivable</option>
+                        <option value="1002">1002 - Cash & Bank</option>
+                        <option value="1003">1003 - Credit Card Receivables</option>
+                        <option value="1004">1004 - Other Receivables</option>
+                    </select>
+                </div>
+                <div class="header-item">
+                    <label>Terms</label>
+                    <select id="terms">
+                        <option value="">Select Terms</option>
+                        <option value="IMD">Immediate</option>
+                        <option value="NET15">Net 15</option>
+                        <option value="NET30">Net 30</option>
+                        <option value="NET45">Net 45</option>
+                        <option value="NET60">Net 60</option>
+                        <option value="EOM">End of Month</option>
+                    </select>
+                </div>
+                <div class="header-item">
+                    <label>Invoice Date</label>
+                    <input type="date" id="invoiceDate">
+                </div>
+                <div class="header-item">
+                    <label>Due Date</label>
+                    <input type="date" id="dueDate" readonly>
+                </div>
             </div>
         </div>
 
@@ -86,7 +90,6 @@
 
         <div class="products-section">
             <div class="products-header">
-                <h3>Products</h3>
                 <button class="add-item-btn" onclick="addNewRow()">
                     <svg width="16" height="16" viewBox="0 0 16 16">
                         <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
@@ -154,11 +157,28 @@
             </table>
         </div>
 
-        <div class="totals">
-            <div class="notes">
-                <h3>Notes</h3>
-                <textarea rows="4" placeholder="Add notes to invoice..."></textarea>
+        <div class="bottom-section">
+            <div class="left-section">
+                <div class="notes-box">
+                    <input type="text" id="memo" placeholder="Memo">
+                    <textarea rows="4" placeholder="Notes to Customer"></textarea>
+                </div>
+                
+                <div class="files-section">
+                    <h3>Attachments</h3>
+                    <div class="file-list" id="fileList">
+                        <!-- Files will be listed here in single lines -->
+                    </div>
+                    <div class="file-upload-box" onclick="document.getElementById('fileInput').click()">
+                        <input type="file" id="fileInput" multiple style="display: none;" onchange="handleFileSelect(event)">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                        <span>Click to upload or drag files here</span>
+                    </div>
+                </div>
             </div>
+
             <div class="total-box">
                 <div class="total-row">
                     <span>Subtotal</span>
