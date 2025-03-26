@@ -16,7 +16,7 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Work Sans', sans-serif;
     margin: 0;
     padding: 2rem;
     background: var(--background-color);
@@ -36,16 +36,39 @@ body {
 
 /* Header Styles */
 .invoice-header {
+    margin-bottom: 1rem;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.header-top .header-item:last-child {
+    width: 200px; /* Set specific width for Invoice No */
+}
+
+.header-bottom {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: 2fr 1fr 1fr 200px; /* Make last column same width as Invoice No */
     gap: 1.5rem;
-    margin-bottom: 2.5rem;
+}
+
+/* Ensure the last column (Due Date) aligns with Invoice No */
+.header-bottom .header-item:last-child {
+    width: 200px; /* Match Invoice No width */
 }
 
 .header-item {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+/* Make customer select wider */
+.header-top .header-item:first-child {
+    flex: 0 1 400px; /* Adjust width as needed */
 }
 
 .header-item label {
@@ -76,23 +99,23 @@ input:focus, select:focus, textarea:focus {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .address-box {
-    padding: 1.5rem;
+    padding: 0.5rem 0.5rem 0rem 0.5rem;
     background: var(--background-color);
     border-radius: 8px;
 }
 
 .address-box h3 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: var(--text-color);
     font-size: 1.1rem;
 }
 
 .address-box textarea {
-    min-height: 120px;
+    min-height: 80px;
     resize: vertical;
 }
 
@@ -101,7 +124,7 @@ input:focus, select:focus, textarea:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .same-as-billing {
@@ -117,34 +140,15 @@ input:focus, select:focus, textarea:focus {
     margin: 0;
 }
 
+textarea,
+.address-box textarea,
+.notes-box textarea {
+    font-family: 'Work Sans', sans-serif !important;
+}
+
+/* Make sure any pre-formatted or white-space styles don't override the font */
 textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    resize: vertical;
-    min-height: 100px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-textarea:focus {
-    outline: none;
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-}
-
-textarea:disabled {
-    background-color: var(--background-color);
-    cursor: not-allowed;
-}
-
-/* Make address text pre-formatted */
-textarea {
-    white-space: pre;
-    font-family: 'Courier New', Courier, monospace;
-    line-height: 1.4;
+    white-space: normal;
 }
 
 /* Items Table */
@@ -166,7 +170,7 @@ textarea {
 }
 
 .items-table td {
-    padding: 1rem;
+    padding: 0.75rem 0.5rem;
     border-bottom: 1px solid var(--border-color);
     background: white;
 }
@@ -198,29 +202,130 @@ textarea {
 }
 
 /* Totals Section */
-.totals {
+.bottom-section {
     display: grid;
     grid-template-columns: 1fr 350px;
     gap: 2rem;
     margin-bottom: 2rem;
 }
 
-.notes {
-    padding: 1.5rem;
+.left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.notes-box,
+.files-section {
     background: var(--background-color);
+    padding: 1.5rem;
     border-radius: 8px;
 }
 
-.notes h3 {
+.notes-box h3,
+.files-section h3 {
     margin-bottom: 1rem;
     color: var(--text-color);
     font-size: 1.1rem;
+    font-weight: 600;
 }
 
-.total-box {
-    padding: 1.5rem;
+.notes-box .notes-header {
+    margin-top: 1.5rem;
+}
+
+.notes-box input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.notes-box textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    resize: vertical;
+}
+
+/* Update file section styles */
+.files-section {
     background: var(--background-color);
+    padding: 1.5rem;
     border-radius: 8px;
+}
+
+.file-list {
+    margin-bottom: 0.5rem;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0;
+}
+
+.file-name {
+    color: #3498db;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+.file-size {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-right: auto;
+}
+
+.file-remove {
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--danger-color);
+    opacity: 0.7;
+}
+
+.file-remove:hover {
+    opacity: 1;
+}
+
+.file-upload-box {
+    border: 2px dashed var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    background: white;
+    transition: border-color 0.2s, background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.file-upload-box svg {
+    fill: var(--secondary-color);
+    width: 20px;
+    height: 20px;
+}
+
+.file-upload-box span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Total box styles */
+.total-box {
+    background: var(--background-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    align-self: flex-start;
 }
 
 .total-row {
@@ -240,6 +345,31 @@ textarea {
 .total-row input {
     width: 120px;
     text-align: right;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .bottom-section {
+        grid-template-columns: 1fr;
+    }
+
+    .total-box {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .left-section {
+        gap: 1rem;
+    }
+
+    .notes-box,
+    .files-section {
+        padding: 1rem;
+    }
 }
 
 /* Action Buttons */
@@ -302,12 +432,27 @@ textarea {
     }
 }
 
+@media (max-width: 1024px) {
+    .header-bottom {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     body {
         padding: 1rem;
     }
 
-    .invoice-header {
+    .header-top {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .header-top .header-item {
+        width: 100%;
+    }
+
+    .header-bottom {
         grid-template-columns: 1fr;
     }
 
@@ -556,8 +701,154 @@ input[readonly] {
 
 .products-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    margin-bottom: 0.5rem;
+}
+
+.memo-input {
+    flex: 1;
+    margin-right: 1rem;
+}
+
+.memo-input input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.memo-input input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Update files section to be standalone */
+.files-section {
+    background: var(--background-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.files-section h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.file-item {
+    display: flex;
     align-items: center;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.file-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.75rem;
+}
+
+.file-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.file-name {
+    color: #3498db;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+.file-size {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.file-remove {
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--danger-color);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.file-remove:hover {
+    opacity: 1;
+}
+
+/* File type icons */
+.file-icon.pdf {
+    color: #e74c3c;
+}
+
+.file-icon.doc {
+    color: #3498db;
+}
+
+.file-icon.img {
+    color: #2ecc71;
+}
+
+.file-icon.txt {
+    color: #95a5a6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .products-section {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .title-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .company-logo {
+        width: 120px;
+        height: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-section {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .invoice-number-section {
+        padding-top: 0;
+    }
+
+    .invoice-number-section input {
+        width: 100%;
+    }
+}
+
+/* Products Section Styles */
+.products-section {
+    margin-bottom: 2rem;
+}
+
+.products-header {
+    display: flex;
+    justify-content: flex-end;
     margin-bottom: 0.5rem;
 }
 
@@ -611,7 +902,7 @@ input[readonly] {
 }
 
 .items-table td {
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 0.5rem;
     border-bottom: 1px solid var(--border-color);
     background: white;
 }
@@ -659,8 +950,8 @@ input[readonly] {
 
 /* Amount column alignment */
 .items-table td.amount {
+    font-family: 'Work Sans', sans-serif;
     text-align: right;
-    font-family: monospace;
     font-size: 1rem;
 }
 
@@ -670,4 +961,172 @@ input[readonly] {
         display: block;
         overflow-x: auto;
     }
+}
+
+/* Memo and Files Section */
+.memo-files-section {
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.memo-section {
+    background: var(--background-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.memo-section h3,
+.files-section h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.files-section {
+    background: var(--background-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.file-upload-box {
+    border: 2px dashed var(--border-color);
+    border-radius: 6px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    background: white;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.file-upload-box:hover {
+    border-color: var(--secondary-color);
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+.file-upload-box svg {
+    fill: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.file-upload-box span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.file-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.75rem;
+}
+
+.file-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.file-name {
+    color: #3498db;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+.file-size {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.file-remove {
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--danger-color);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.file-remove:hover {
+    opacity: 1;
+}
+
+/* File type icons */
+.file-icon.pdf {
+    color: #e74c3c;
+}
+
+.file-icon.doc {
+    color: #3498db;
+}
+
+.file-icon.img {
+    color: #2ecc71;
+}
+
+.file-icon.txt {
+    color: #95a5a6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .memo-files-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Update the notes-box styles */
+.notes-box {
+    background: var(--background-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.notes-box input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.notes-box textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    resize: vertical;
+}
+
+/* Add specific style for Terms dropdown if needed */
+#terms {
+    min-width: 120px; /* You can adjust this value as needed */
 } 
