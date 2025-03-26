@@ -73,7 +73,7 @@ body {
 
 .header-item label {
     font-weight: 500;
-    color: var(--text-muted);
+    color: #6366f1;
     font-size: 0.9rem;
 }
 
@@ -605,7 +605,7 @@ input[readonly] {
 
 .invoice-title h1 {
     font-size: 2rem;
-    color: var(--primary-color);
+    color: #6366f1;
     font-weight: 600;
     margin: 0;
 }
@@ -625,7 +625,7 @@ input[readonly] {
 
 .invoice-number-section label {
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: #6366f1;
     font-weight: 500;
 }
 
