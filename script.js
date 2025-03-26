@@ -342,4 +342,73 @@ function updateDueDate() {
     }
 
     dueDateInput.value = formatDate(dueDate);
+}
+
+// Add these functions to your script.js
+function handleFileSelect(event) {
+    const files = event.target.files;
+    const fileList = document.getElementById('fileList');
+    
+    for (let file of files) {
+        addFileToList(file);
+    }
+}
+
+function addFileToList(file) {
+    const fileList = document.getElementById('fileList');
+    const fileItem = document.createElement('div');
+    fileItem.className = 'file-item';
+    
+    const size = formatFileSize(file.size);
+    
+    fileItem.innerHTML = `
+        <span class="file-name">${file.name}</span>
+        <span class="file-size">${size}</span>
+        <button class="file-remove" onclick="removeFile(this)" title="Remove file">
+            <svg width="14" height="14" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </button>
+    `;
+    
+    fileList.appendChild(fileItem);
+}
+
+function removeFile(button) {
+    button.closest('.file-item').remove();
+}
+
+function getFileType(filename) {
+    const ext = filename.split('.').pop().toLowerCase();
+    if (['pdf'].includes(ext)) return 'pdf';
+    if (['doc', 'docx'].includes(ext)) return 'doc';
+    if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) return 'img';
+    return 'txt';
+}
+
+function getFileIcon(filename) {
+    const type = getFileType(filename);
+    const icons = {
+        pdf: `<svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+            </svg>`,
+        doc: `<svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-7 2h6v2H7V4zm10 16H7v-2h10v2zm0-4H7v-2h10v2z"/>
+            </svg>`,
+        img: `<svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/>
+            </svg>`,
+        txt: `<svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h5v7h7v9H6z"/>
+            </svg>`
+    };
+    return icons[type];
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 } 
